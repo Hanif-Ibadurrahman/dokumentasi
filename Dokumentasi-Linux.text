@@ -1,0 +1,664 @@
+# INSTALL
+
+- NodeJS dan NPM
+sudo apt update
+sudo apt install nodejs && sudo apt install npm
+sudo npm cache clean --force
+sudo npm i -g n
+sudo n latest / sudo n stable
+
+- Youtube-DL
+sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
+sudo chmod a+rx /usr/local/bin/youtube-dl
+
+- Git
+sudo add-apt-repository ppa:git-core/ppa 
+sudo apt update
+sudo apt install git
+
+- Composer
+Download file secara manual di https://getcomposer.org/download/ atau
+sudo curl -L https://getcomposer.org/download/ -o /usr/local/bin/composer
+mv composer.phar /usr/local/bin/composer
+sudo chmod -R 755 /usr/local/bin/composer
+
+----------------------------------------------------------------------------------
+
+- MySQL Server
+sudo apt update
+sudo apt install mysql-server
+
+Setting
+sudo mysql -u root -p
+sudo mysql_secure_installation
+setelah itu pilih No sampai akhir atau sesuai kebutuhan (y, 2, input password, y, y, n, y, y)
+
+Membuat user baru dan akses
+---Untuk Local---
+mysql>CREATE USER 'admin'@'localhost' IDENTIFIED WITH caching_sha2_password BY 'password';
+atau
+mysql>CREATE USER 'admin'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+
+Memberikan akses:
+mysql>GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' WITH GRANT OPTION;
+
+mysql>FLUSH PRIVILEGES;
+mysql>exit
+
+---Untuk Luar---
+mysql>CREATE USER 'admin'@'%' IDENTIFIED WITH caching_sha2_password BY 'password';
+atau
+mysql>CREATE USER 'admin'@'%' IDENTIFIED WITH mysql_native_password BY 'password';
+
+Memberikan akses:
+mysql>GRANT ALL PRIVILEGES ON *.* TO 'admin'@'%' WITH GRANT OPTION;
+
+mysql>FLUSH PRIVILEGES;
+mysql>exit
+
+Mengganti nama user
+RENAME USER 'asset'@'localhost' TO 'sammy'@'remote_server_ip';
+atau
+RENAME USER 'asset'@'localhost' TO 'sammy'@'%';
+
+Pemberian akses juga bisa seperti ini
+mysql>GRANT CREATE, ALTER, DROP, INSERT, UPDATE, DELETE, SELECT, REFERENCES, RELOAD on *.* TO 'sammy'@'remote_server_ip' WITH GRANT OPTION;
+
+Mengganti Password
+mysql>ALTER USER 'root'@'localhost' IDENTIFIED WITH caching_sha2_password BY 'password';
+atau
+mysql>ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+
+Mengetes user, password, dan database server (Remote)
+sudo mysql -u user -h database_server_ip -p
+contoh: 
+sudo mysql -u root -h 34.101.192.160 -p (Enter)
+masukkan password (Enter)
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+// Install Nginx
+sudo apt update
+sudo apt install nginx
+
+( ) Firewall
+
+
+Jika tidak mempunyai domain name dan tidak tahu ip publik
+ip addr show eth0 | grep inet | awk '{ print $2; }' | sed 's/\/.*$//'
+atau
+curl -4 icanhazip.com
+
+Test domain atau ip yang didapatkan
+http://server_domain_or_IP
+
+( ) Install Mysql
+
+Jika Nginx
+sudo apt-get install php-fpm php-mysql
+sudo nano /etc/php/[versi php yang digunakan]/fpm/php.ini
+line 798 => ;cgi.fix_pathinfo=1 => cgi.fix_pathinfo=0
+sudo systemctl restart php[versi php]-fpm
+
+Jika telah ada resource
+sudo mv system.com /var/www/
+
+Jika tidak ada
+sudo mkdir -p /var/www/system.com/html
+
+sudo cp /etc/nginx/site-available/default /etc/nginx/site-available/system.com
+sudo nano /etc/nginx/site-available/system.com
+
+server {
+    listen 80;
+    listen [::]:80;
+
+    root /var/www/system.com/public/;
+    index index.php index.html index.htm index.nginx-debian.html;
+
+    server_name system.com www.system.com;
+
+    location / {
+        # Untuk laravel
+            try_files $uri $uri/ /index.php$is_args$args;
+        # default
+        try_files $uri $uri/ =404;
+    }
+
+    location ~ \.php$ {
+            include snippets/fastcgi-php.conf;
+            fastcgi_pass unix:/var/run/php/php[versi php]-fpm.sock;
+    }
+
+    location ~ /\.ht {
+            deny all;
+    }
+}
+
+Mengaktifkan
+sudo ln -s /etc/nginx/sites-available/system.com /etc/nginx/sites-enabled/
+
+Untuk menghindari hash bucket memory problem
+sudo nano /etc/nginx/nginx.conf
+
+http {
+    . . .
+
+   #server_names_hash_bucket_size 64; => server_names_hash_bucket_size 64;
+
+    . . .
+}
+
+sudo nginx -t
+sudo systemctl reload nginx
+
+sudo nano /etc/hosts
+127.0.0.1 system.com www.system.com
+
+//Untuk multisite nginx:
+Ada 2 cara:
+1)
+Buat baru ini:
+sudo cp /etc/nginx/site-available/default /etc/nginx/site-available/newwebsite
+
+Lakukan perubahan sesuai dengan kebutuhan website baru
+sudo nano /etc/nginx/site-available/newwebsite.com
+
+Aktifkan
+sudo ln -s /etc/nginx/sites-available/newwebsite /etc/nginx/sites-enabled/
+
+sudo systemctl reload nginx.service atau sudo systemctl restart nginx.service
+
+2)
+sudo cp /etc/nginx/site-available/default /etc/nginx/site-available/default.backup
+sudo nano default
+
+Tambahkan di file default dengan beda server{}
+
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    root /var/www/;
+
+    index index.php index.html index.htm index.nginx-debian.html;
+
+    server_name _;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    location /phpmyadmin {
+                try_files $uri $uri/ =404;
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
+    }
+
+    location ~ /\.ht {
+        deny all;
+    }
+}
+
+server {
+        listen 80;
+        listen [::]:80;
+
+        root /var/www/simrs.com/public/;
+
+        index index.php index.html index.htm index.nginx-debian.html;
+
+        server_name simrs.com www.simrs.com;
+
+        location / {
+                try_files $uri $uri/ /index.php$is_args$args;
+        }
+
+        location ~ \.php$ {
+                include snippets/fastcgi-php.conf;
+                fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
+        }
+
+        location ~ /\.ht {
+                deny all;
+        }
+}
+
+server {
+        listen 80;
+        listen [::]:80;
+
+        root /var/www/system.com/public/;
+
+        index index.php index.html index.htm index.nginx-debian.html;
+
+        server_name system.com www.system.com;
+
+        location / {
+                try_files $uri $uri/ /index.php$is_args$args;
+        }
+
+        location ~ \.php$ {
+                include snippets/fastcgi-php.conf;
+                fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
+        }
+
+        location ~ /\.ht {
+                deny all;
+        }
+}
+
+sudo systemctl reload nginx
+---------------------------------------------------------------------------------------------------------------------------
+
+// Install Phpmyadmin
+sudo apt install phpmyadmin
+
+Memilih web server
+-Jika menggunakan apache, pilih
+-Jika menggunakan nginx, langsung ok (skip)
+
+dbconfig-common 
+Pilih Yes, Jika terjadi kesalahan Retry dan isi sesuai dengan settingan mysql yaitu username dan password
+
+Untuk mengaktifkan
+sudo ln -s /usr/share/phpmyadmin /var/www/html
+
+Jika phpmyadmin not found ketika pakai apache
+sudo ln -s /etc/phpmyadmin/apache.conf /etc/apache2/conf-available/phpmyadmin.conf
+sudo a2enconf phpmyadmin.conf
+sudo systemctl reload apache2
+
+Jika tidak memilik web server, untuk nginx
+sudo ln -s /usr/share/phpmyadmin /var/www/ atau tidak perlu dibuat symbolic link
+namun di root menggunakan /usr/share/phpmyadmin
+
+Untuk nginx, dll
+Dalam subfolder suatu domain
+sudo ln -s /usr/share/phpmyadmin /var/www/system.com/
+contoh cara akses : system.com/phpmyadmin
+ 
+sudo ln -s /usr/share/phpmyadmin /var/www/
+sudo nano /etc/nginx/site-available/default
+server{
+#Ganti bagian root jadi
+root /var/www/;
+…
+
+#Tambahkan index.php
+index.php;
+
+#Tambah url
+location /phpmyadmin {
+                try_files $uri $uri/ =404;
+}
+
+#Untuk php
+location ~ \.php$ {
+                include snippets/fastcgi-php.conf;
+                fastcgi_pass unix:/var/run/php/php[versi php]-fpm.sock;
+}
+
+location ~ /\.ht {
+                deny all;
+}
+}
+sudo service nginx restart
+
+Saran mengganti link (/phpmyadmin) menjadi nama yang tidak lain agar tidak mudah di brute force 
+---------------------------------------------------------------------------------------------------------------------------
+ // Install MongoDB
+https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
+
+wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key add -
+
+Jika terdapat info gnupg is not installed, maka: sudo apt-get install gnupg
+--------------------------------------------------------
+
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/5.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-5.0.list
+
+sudo apt-get update
+
+sudo apt-get install -y mongodb-org
+
+sudo systemctl status mongod
+
+Jika menerima notif error: Failed to start mongod.service: Unit mongod.service not found.
+sudo systemctl daemon-reload
+------------------------------------
+
+Jika belum berjalan: sudo systemctl start mongod
+Jika ingin berjalan secara otomatis: sudo systemctl enable mongod
+
+mongosh
+---------------------------------------------------------------------------------------------------------------------------
+// Nginx sebagai Web Server dan Setting Reverse Proxy untuk Apache di Ubuntu
+
+sudo apt update
+
+Jika belum ada package php-fpm: sudo apt install php-fpm
+Jika belum ada package apache2: sudo apt install apache2
+
+wget https://mirrors.edge.kernel.org/ubuntu/pool/multiverse/liba/libapache-mod-fastcgi/libapache2-mod-fastcgi_2.4.7~0910052141-1.2_amd64.deb
+
+sudo dpkg -i libapache2-mod-fastcgi_2.4.7~0910052141-1.2_amd64.deb
+
+sudo apt update
+sudo apt upgrade
+
+Konfigurasi Apache dan PHP-FPM
+-Membuat backup
+sudo cp /etc/apache2/ports.conf /etc/apache2/ports.conf.backup
+
+sudo nano /etc/apache2/ports.conf
+Ganti 80 => 8080
+
+sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/000-default.conf.backup
+
+sudo a2dissite 000-default atau sudo rm /etc/apache2/sites-enabled/000-default.conf
+sudo nano /etc/apache2/sites-available/000-default.conf
+
+sudo a2ensite 000-default
+sudo systemctl reload apache2
+
+sudo lsof -i :8080
+Jika terdapat instalan LAMP dengan mod_php, harus di disable terlebih dahulu 
+sudo a2dismod php[versi php]
+sudo a2enmod actions
+sudo cp /etc/apache2/mods-available/fastcgi.conf /etc/apache2/mods-available/fastcgi.conf.backup
+sudo nano /etc/apache2/mods-available/fastcgi.conf
+
+<IfModule mod_fastcgi.c>
+  AddHandler fastcgi-script .fcgi
+  #FastCgiWrapper /usr/lib/apache2/suexec
+  FastCgiIpcDir /var/lib/apache2/fastcgi
+  AddType application/x-httpd-fastphp .php
+  Action application/x-httpd-fastphp /php-fcgi
+  Alias /php-fcgi /usr/lib/cgi-bin/php-fcgi
+  FastCgiExternalServer /usr/lib/cgi-bin/php-fcgi -socket /run/php/php[versi php]-fpm.sock -pass-header Authorization
+  <Directory /usr/lib/cgi-bin>
+    Require all granted
+  </Directory>
+</IfModule>
+
+check syntax
+sudo apachectl -t
+sudo a2enmod fastcgi
+--------------------
+Jika ada error
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 127.0.1.1. Set the 'ServerName' directive globally to suppress this message
+akan disetting di tahap selanjutnya
+--------------------
+sudo systemctl restart apache2
+
+untuk verifikasi dan melihat
+echo "<?php phpinfo(); ?>" | sudo tee /var/www/html/info.php
+
+Jika di cloud harus setting firewall
+Firewall()
+sudo ufw allow "Apache Full"
+sudo ufw allow 8080
+
+check
+http://localhost:8080/ atau http://localhost:8080/info.php
+atau 
+http://server_ip:8080/ atau http://server_ip:8080/info.php
+
+Multi Virtual Hosts() atau Multi Site Apache() dengan port 8080
+Milti Site Nginx()
+
+Konfigurasi Nginx untuk Apache:
+sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/apache
+sudo nano /etc/nginx/sites-available/apache
+
+server {
+    listen 80;
+    server_name apache-system.com www.apache-system.com;
+
+    location / {
+        proxy_pass http://127.0.0.1:8080;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+
+server {
+    listen 80;
+    server_name apache-simrs.com www.apache-simrs.com;
+
+    location / {
+        proxy_pass http://127.0.0.1:8080;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+
+sudo ln -s /etc/nginx/sites-available/apache /etc/nginx/sites-enabled/apache
+sudo systemctl reload nginx
+
+Memasang SSL()
+
+Blocking Direct Access to Apache (Optional)
+sudo iptables -I INPUT -p tcp --dport 8080 ! -s your_server_ip -j REJECT --reject-with tcp-reset
+
+------------------------------------------------------------------------------------------------
+
+sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
+datadir = /var/lib/mysql (hilangkan tanda #)
+bind-address = 127.0.0.1 -> *, ::, or 0.0.0.0
+mysqlx-bind-address = 127.0.0.1 -> *, ::, or 0.0.0.0
+
+sudo systemctl restart mysql
+sudo mysql -u root -p
+
+// Firewall
+
+// Jika belum terinstall
+sudo apt install ufw
+sudo nano /etc/default/ufw
+
+Jika belum aktif
+sudo ufw enable
+
+Jika sudah aktif (optional)
+sudo nano /etc/default/ufw
+IPV6=yes
+
+Melihat port / settingan firewall
+sudo ufw status / sudo ufw status verbose / sudo ufw status numbered
+
+Melihat list di ufw
+sudo ufw app list
+
+Semua IP address dapat mengakses
+sudo ufw allow 'Nginx HTTP' (Nginx)
+sudo ufw allow 3306 (Mysql)
+sudo ufw allow ssh / sudo ufw allow 22 (SSH)
+sudo ufw allow http / sudo ufw allow 80 (HTTP)
+sudo ufw allow https / sudo ufw allow 443 (HTTPS)
+
+// Membuka untuk HTTP dan HTTPS
+sudo ufw allow proto tcp from any to any port 80,443
+
+sudo ufw allow from remote_IP_address to any port 3306
+
+sudo ufw reload
+sudo service ufw restart
+
+// Untuk GCP
+Setting VPC network > Firewall
+Tambahkan nama: default-mysql
+Log off
+Priority 1000
+Direction Ingress
+Action Allow
+Target All instances in the network
+Source Ip range 0.0.0.0/0
+Second source filter none
+select tcp: 3306
+
+Macam macam
+Melakukan disable dan delete rules
+sudo ufw reset
+
+Mematikan
+sudo ufw disable
+
+Melakukan delete berdasarkan rule
+sudo ufw delete allow http
+
+Melakukan delete berdasarkan nomor
+sudo ufw delete number
+
+Melihat Interface
+ip addr
+
+Block spesifik IP
+sudo ufw deny from 15.15.15.51
+
+Membuka akses ke port tertentu dengan IP menggunakan Subnet
+sudo ufw allow from 15.15.15.0/24 to any port 873
+
+Block Via Interface
+sudo ufw deny in on eth0 from 15.15.15.51
+
+Membuka dengan range
+sudo ufw allow 6000:6007/tcp
+sudo ufw allow 6000:6007/udp
+
+// Set Putty
+Masukkan IP address
+Lalu Connection > SSH > Auth > Browse
+Select .ppk
+
+// Create Symbolic Link
+ln -s /path/to/original /path/to/link
+
+sudo ln -s /etc/nginx/sites-available/asset.com.conf /etc/nginx/sites-enabled/asset.com.conf
+
+Error
+/bootstrap/cache directory must be present and writable.
+sudo chmod -R 777 cache/
+
+// Install Aplikasi
+$ ./configure
+$ sudo make && sudo make install
+
+//Create a icon on the desktop
+Cari file .desktop lalu copy ke desktop
+Jika tidak ada respon ketika di klik maka perlu dilakukan perubahan pada Exec dengan diubah sesuai lokasi file
+
+// Install php, mysql
+sudo apt install mysql-server php -y
+
+Melihat user, auth, host dan plugin yang ada di mysql server
+mysql>SELECT user,authentication_string,plugin,host FROM mysql.user;
+
+-----------------------------------------------------------------------------------------------------------------------
+// Untuk memasang SSL
+sudo add-apt-repository ppa:certbot/certbot
+sudo apt update
+
+Untuk apache:
+sudo apt install certbot python3-certbot-apache
+
+Untuk Nginx:
+sudo apt install certbot python3-certbot-nginx
+
+Untuk apache
+sudo certbot --apache
+
+Untuk nginx
+sudo certbot --nginx -d simrs.com -d www.simrs.com
+
+sudo certbot certificates
+---------------------------------------------------------------------------------------------------------------------------
+// Setting kepemilikan folder/file 
+sudo chown -R [USER NAME]:[USER NAME] /var/www
+chown -R www-data:www-data storage public/uploads 
+atau
+chown -R www-data:www-data storage
+chown -R www-data:www-data public/uploads
+
+chmod -R 775 storage
+chmod -R 755 public/uploads
+---------------------------------------------------------------------------------------------------------------------------
+composer install --no-dev --prefer-source berbeda dengan
+composer install
+---------------------------------------------------------------------------------------------------------------------------
+
+// MySQL Public Key Retrieval is not allowed DBeaver
+Klik Kanan > Edit Connection > Connection Setting > Main >Edit Driver Setting > Driver Properties > User Properties > Klik Kanan > Add New Property > allowPublicKeyRetrieval > value > true
+
+<VirtualHost *:80>
+<Directory /var/www/asset/public>
+Allow From All
+AllowOverride All
+Options -Indexes
+</Directory>
+DocumentRoot /var/www/asset/public
+ServerName 34.101.192.160
+ErrorLog ${APACHE_LOG_DIR}/asset.error.log
+CustomLog ${APACHE_LOG_DIR}/asset.access.log combined
+</VirtualHost>
+
+// Multiple site apache
+Ada 2 Cara: 
+Buat di masing masing file .conf
+<VirtualHost *:80>
+<Directory /var/www/asset.com/public>
+Allow From All
+AllowOverride All
+Options -Indexes
+</Directory>
+
+DocumentRoot /var/www/asset.com/public
+ServerName asset.com
+ServerAlias www.asset.com
+ServerAdmin admin@asset.com
+ErrorLog ${APACHE_LOG_DIR}/asset.error.log
+CustomLog ${APACHE_LOG_DIR}/asset.access.log combined
+</VirtualHost>
+-----------------------------------------------------------------------------
+Didalam 1 file .conf seperti di 000.default.conf
+VirtualHost *:8080>
+        <Directory /var/www/simrs.com/public>
+                AllowOverride None
+                Options -Indexes
+                Order deny,allow
+                Deny from all
+                #Allow from all
+                #Allow from 127.0.0.1
+        </Directory>
+
+        ServerAdmin admin@simrs.com
+        ServerName apache-simrs.com
+        ServerAlias www.apache-simrs.com
+        DocumentRoot /var/www/simrs.com/public
+        ErrorLog ${APACHE_LOG_DIR}/simrs.error.log
+        CustomLog ${APACHE_LOG_DIR}/simrs.access.log combined
+</VirtualHost>
+
+Untuk mengaktifkan
+sudo a2ensite asset.com.conf
+
+Untuk reload apache
+sudo systemctl reload apache2
+
+sudo nano /etc/hosts
+127.0.0.1 asset.com
+
+----------------------------------------------------------------------------------------------------------
+
+Untuk moodle
+DocumentRoot /var/www/elearning.com/public -> DocumentRoot /var/www/elearning.com/
+
+untuk kepemilikan moodle menjadi ('www-data', 'nobody', or 'apache').
+di folder www dan folder moodle, chmod 775

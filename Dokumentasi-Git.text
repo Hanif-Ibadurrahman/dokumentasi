@@ -17,8 +17,8 @@ Perintah - Perintah Git
 - git config
 untuk mengatur konfigurasi tertentu sesuai keinginan pengguna, seperti email, 
 algoritma untuk diff, username, format file, dll
-example: git config --global user.email "you@example.com"
-        git config --global user.name "Your Name"
+example: git config --global user.email "you@example.com" (Harus dilakukan ketika ingin push)
+        git config --global user.name "Your Name" (Harus dilakukan ketika ingin push)
 
 - git init
 untuk membuat repositori baru.
