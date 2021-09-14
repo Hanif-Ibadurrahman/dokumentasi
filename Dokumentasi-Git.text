@@ -1,0 +1,85 @@
+.gitigrone
+https://www.toptal.com/developers/gitignore
+https://docs.gitignore.io/
+
+# komentar
+*.[oa]             # abaikan file *.o dan *.a
+*~                 # abaikan file yang diakhiri dengan ~
+*.bak              # abaikan file dengan ekstensi .bak
+!file.bak          # pengecualian, file.bak tidak diabaikan
+/css               # hanya mengabaikan file didalam folder css, 
+                   # foldernya didalamnya tidak
+test/              # abaikan semua file didalam folder test/
+doc/*.txt          # abaikan doc/notes.txt, 
+                   # tapi tidak doc/server/arch.txt
+
+Perintah - Perintah Git
+- git config
+untuk mengatur konfigurasi tertentu sesuai keinginan pengguna, seperti email, 
+algoritma untuk diff, username, format file, dll
+example: git config --global user.email "you@example.com"
+        git config --global user.name "Your Name"
+
+- git init
+untuk membuat repositori baru.
+
+- git add
+untuk menambahkan file ke index.
+example: git add Dokumentasi.text
+         git add . (Memasukkan semua ke index)
+
+- git restore
+
+- git rm
+untuk menghapus file dari index dan direktori kerja.
+example: git rm Git/Dokumentasi.text
+
+- git gc
+Untuk mengoptimasi repository melalui garbage collection, yang akan membersihkan file yang tidak dibutuhkan dan mengoptimasinya
+example: git gc
+
+- git fsck
+Untuk membuat pengecekan keseluruhan dari file system git, gunakan perintah git fsck. Object yang corrupt akan dikenali.
+example: git fsck
+
+- git fetch
+untuk menampilkan semua object dari remote repository yang tidak berada di direktori kerja lokal.
+example: git fetch origin
+
+- git pull
+Untuk menggabungkan semua perubahan yang ada di remote repository ke direktori lokal
+example: git pull
+
+- git branch
+Perintah git branch bisa digunakan untuk me-list, membuat atau menghapus branch
+example: git branch (Menampilkan semua branch yang ada di repository)
+         git branch -d <branch-name> (Menghapus branch)
+
+- git checkout
+Perintah git checkout bisa digunakan untuk membuat branch atau untuk berpindah diantaranya.
+example: git checkout -b <nama-branch> (Membuat branch baru dan berpindah ke dalamnya)
+         git checkout <branch-name> (Untuk berpindah dari branch satu ke lainnya)
+
+- git prep
+untuk mencari frase dan/atau kata yang berada di dalam direktori.
+example: git grep "Dokumentasi"
+
+- git archive
+Perintah git archive memungkinkan user membuat file zip atau tar yang mengandung susunan repository. Contohnya:
+example: git archive --format=zip master
+
+Membuat repository baru
+
+echo "# Dokumentasi" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/Hanif-Ibadurrahman/Dokumentasi.git
+git push -u origin main
+
+Melakukan push pada repository yang telah ada
+
+git remote add origin https://github.com/Hanif-Ibadurrahman/Dokumentasi.git
+git branch -M main
+git push -u origin main
