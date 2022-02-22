@@ -1,29 +1,3 @@
-# INSTALL
-
-- NodeJS dan NPM
-sudo apt update
-sudo apt install nodejs && sudo apt install npm
-sudo npm cache clean --force
-sudo npm i -g n
-sudo n latest / sudo n stable
-
-- Youtube-DL
-sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
-sudo chmod a+rx /usr/local/bin/youtube-dl
-
-- Git
-sudo add-apt-repository ppa:git-core/ppa 
-sudo apt update
-sudo apt install git
-
-- Composer
-Download file secara manual di https://getcomposer.org/download/ atau
-sudo curl -L https://getcomposer.org/download/ -o /usr/local/bin/composer
-mv composer.phar /usr/local/bin/composer
-sudo chmod -R 755 /usr/local/bin/composer
-
-----------------------------------------------------------------------------------
-
 - MySQL Server
 sudo apt update
 sudo apt install mysql-server

@@ -31,4 +31,35 @@
   sudo chmod a+rx /usr/local/bin/youtube-dl
   ```
 
+<a name="types--git"></a><a name="1.3"></a>
+
+- [1.3](#types--git) **Git**
+
+  ```command
+  sudo add-apt-repository ppa:git-core/ppa
+  sudo apt update
+  sudo apt install git
+  ```
+
+<a name="types--composer"></a><a name="1.4"></a>
+
+- [1.4](#types--composer) **Composer**
+
+  ```command
+  Download file secara manual di https://getcomposer.org/download/ atau
+  sudo curl -L https://getcomposer.org/download/ -o /usr/local/bin/composer
+  mv composer.phar /usr/local/bin/composer
+  sudo chmod -R 755 /usr/local/bin/composer
+  ```
+
+<a name="types--php"></a><a name="1.4"></a>
+
+- [1.4](#types--php) **PHP**
+
+  ```command
+  sudo apt install software-properties-common
+  sudo add-apt-repository ppa:ondrej/php
+  sudo apt install php8.1 php7.4
+  ```
+
 **[⬆ back to top](#table-of-contents)**
