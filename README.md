@@ -52,9 +52,9 @@
   sudo chmod -R 755 /usr/local/bin/composer
   ```
 
-<a name="types--php"></a><a name="1.4"></a>
+<a name="types--php"></a><a name="1.5"></a>
 
-- [1.4](#types--php) **PHP**
+- [1.5](#types--php) **PHP**
 
   ```command
   sudo apt install software-properties-common
