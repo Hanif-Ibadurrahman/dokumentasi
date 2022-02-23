@@ -62,4 +62,19 @@
   sudo apt install php8.1 php7.4
   ```
 
+<a name="types--reset-navicat"></a><a name="1.6"></a>
+
+- [1.6](#types--reset-navicat) **Reset Trial Navicat On Linux**
+
+> If you don't want to activate and just want to reset the trial, please delete the ~/.config/dconf/user files
+> and the ~/.config/navicat folder. Pay attention to the backup data.
+
+```command
+~/.config/dconf/user
+```
+
+```command
+~/.config/navicat folder
+```
+
 **[⬆ back to top](#table-of-contents)**
