@@ -94,11 +94,11 @@ wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 > and the ~/.config/navicat folder. Pay attention to the backup data.
 
 ```command
-~/.config/dconf/user
+rm ~/.config/dconf/user
 ```
 
 ```command
-~/.config/navicat folder
+rm -r ~/.config/navicat
 ```
 
 **[⬆ back to contents](#table-of-contents)**
