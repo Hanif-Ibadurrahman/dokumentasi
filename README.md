@@ -39,6 +39,7 @@
 
 - [1.1.3](#types--git) **Git**
 
+  Source: [GIT](https://git-scm.com/download/linux)
   ```command
   sudo add-apt-repository ppa:git-core/ppa
   sudo apt update
