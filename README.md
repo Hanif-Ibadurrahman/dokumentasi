@@ -83,13 +83,33 @@ wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 
 **[⬆ back to contents](#table-of-contents)**
 
-<a name="types--reset"></a><a name="1.2"></a>
 
-- [1.2](#types--reset) **Reset**
+<a name="types--create"></a><a name="2"></a>
 
-<a name="types--reset-navicat"></a><a name="1.2.1"></a>
+- [2](#types--create) **Create**
 
-- [1.2.1](#types--reset-navicat) **Reset Trial Navicat On Linux**
+<a name="types--create-ssh"></a><a name="2.1"></a>
+
+- [2.1](#types--create-ssh) **Create SSH**
+
+```command
+ssh-keygen -t rsa
+```
+
+How to get result ssh
+```command
+cat ~/.ssh/id_rsa.pub
+```
+
+**[⬆ back to contents](#table-of-contents)**
+
+<a name="types--reset"></a><a name="3"></a>
+
+- [3](#types--reset) **Reset**
+
+<a name="types--reset-navicat"></a><a name="3.1"></a>
+
+- [3.1](#types--reset-navicat) **Reset Trial Navicat On Linux**
 
 > If you don't want to activate and just want to reset the trial, please delete the ~/.config/dconf/user files
 > and the ~/.config/navicat folder. Pay attention to the backup data.
