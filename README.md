@@ -102,6 +102,8 @@ select button side search > preferences > unnamed > command > run a custom comma
 ```command
 curl -L git.io/antigen > antigen.zsh
 ```
+
+```command
 # User configuration
 source ~/antigen.zsh
 
@@ -126,6 +128,7 @@ antigen theme spaceship-prompt/spaceship-prompt
 antigen apply
 
 alias cgg="git log --oneline --pretty=oneline --graph"
+```
 
 reopen terminal and run 
 ```command
