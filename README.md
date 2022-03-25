@@ -81,6 +81,58 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 ```
 
+<a name="types--zsh"></a><a name="1.1.7"></a>
+
+- [1.1.6](#types--nvm) **[Oh My ZSH]**(https://ohmyz.sh/)
+
+```command
+sudo apt update
+sudo apt install zsh
+```
+
+```command
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
+
+for default terminal
+select button side search > preferences > unnamed > command > run a custom command instead of mt shell > custom command > zsh
+
+**[Antigen]**(https://github.com/zsh-users/antigen)
+
+```command
+curl -L git.io/antigen > antigen.zsh
+```
+# User configuration
+source ~/antigen.zsh
+
+# Load the oh-my-zsh's library.
+antigen use oh-my-zsh
+
+# Bundles from the default repo (robbyrussell's oh-my-zsh).
+antigen bundle git
+antigen bundle heroku
+antigen bundle pip
+antigen bundle lein
+antigen bundle command-not-found
+
+# Syntax highlighting bundle.
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-autosuggestions
+
+# Load the theme.
+antigen theme spaceship-prompt/spaceship-prompt
+
+# Tell Antigen that you're done.
+antigen apply
+
+alias cgg="git log --oneline --pretty=oneline --graph"
+
+reopen terminal and run 
+```command
+zsh
+```
+
+
 **[⬆ back to contents](#table-of-contents)**
 
 
