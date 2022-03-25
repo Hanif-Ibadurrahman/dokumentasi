@@ -636,3 +636,12 @@ DocumentRoot /var/www/elearning.com/public -> DocumentRoot /var/www/elearning.co
 
 untuk kepemilikan moodle menjadi ('www-data', 'nobody', or 'apache').
 di folder www dan folder moodle, chmod 775
+
+----------------------------------------------------------------------------------------------------------
+
+How To Fix Busybox Initramfs Error On Ubuntu
+-For show actual error
+>exit
+-Fix partision has some errors with this command 
+>fsck /dev/sda1 -y
+>exit
