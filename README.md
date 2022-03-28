@@ -45,7 +45,11 @@
   sudo apt update
   sudo apt install git
   ```
-
+  Set session
+  ```command
+  git config --global credential.helper store
+  git config --global credential.helper cache
+  ```
 <a name="types--composer"></a><a name="1.1.4"></a>
 
 - [1.1.4](#types--composer) **Composer**
