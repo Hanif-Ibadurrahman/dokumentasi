@@ -139,6 +139,14 @@ reopen terminal and run
 zsh
 ```
 
+<a name="types--docker"></a><a name="1.1.8"></a>
+
+- [1.1.8](#types--docker) **Docker**
+
+run after build
+  ```command
+    docker-compose up -d --build
+  ```
 
 **[⬆ back to contents](#table-of-contents)**
 
