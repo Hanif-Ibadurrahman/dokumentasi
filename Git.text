@@ -68,6 +68,10 @@ example: git grep "Dokumentasi"
 Perintah git archive memungkinkan user membuat file zip atau tar yang mengandung susunan repository. Contohnya:
 example: git archive --format=zip master
 
+- git rebase
+untuk mengganti message commit yang berada di belakang commit message yang lainnya
+example: git rebase -i 3c612d0
+
 Membuat repository baru
 
 echo "# Dokumentasi" >> README.md
