@@ -143,9 +143,26 @@ zsh
 
 - [1.1.8](#types--docker) **Docker**
 
+build
+  ```command
+    docker build -t local/something-api:latest .
+  ```
+  
+  ```command
+    docker build --build-arg APP_ENV=development -t local/something-fe:latest .
+  ```
+
 run after build
   ```command
     docker-compose up -d --build
+  ```
+fix-permission-docker-kill  
+  ```command
+    sudo aa-status
+    sudo systemctl disable apparmor.service --now
+    sudo service apparmor teardown
+    sudo aa-status
+    docker-compose down
   ```
 
 **[⬆ back to contents](#table-of-contents)**
