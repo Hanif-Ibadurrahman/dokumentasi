@@ -139,6 +139,9 @@ reopen terminal and run
 zsh
 ```
 
+set zsh for default terminal
+click hamburger button on terminal > preferences > unnamed > tab command > click Run a custom command instead of my shell > zsh
+
 <a name="types--docker"></a><a name="1.1.8"></a>
 
 - [1.1.8](#types--docker) **Docker**
