@@ -146,20 +146,81 @@ click hamburger button on terminal > preferences > unnamed > tab command > click
 
 - [1.1.8](#types--docker) **Docker**
 
-build
+Docker ps displays every docker instance currently running in your environment. If you add the -a option, then you even have the stopped ones.
   ```command
-    docker build -t local/something-api:latest .
+    docker ps (-a)
   ```
   
+Docker-compose ps displays all the containers once started with it (currently running or not).
   ```command
-    docker build --build-arg APP_ENV=development -t local/something-fe:latest .
+    docker-compose ps
+  ```  
+  
+The docker images show to you the images you have build, and the -a show you the intermediate images.  
+  ```command
+    docker images (-a)
+  ``` 
+  
+It will build your images if they aren't already and will start your dockers
+  ```command
+    docker-compose up
   ```
-
-run after build
+  
+If you want to re-build your images, use the option --build (you can also use the command docker-compose build to only build the images). The option -d, which means "detach" make the containers run in the background.
   ```command
     docker-compose up -d --build
   ```
-fix-permission-docker-kill  
+
+With Docker, you need a separate command to build your image where you can specify the name of your image and you have to specify the PATH or URL to your context (this can be a git repository).
+  ```command
+    docker build (-t <NAME>) <PATH>/<URL>
+  ```
+
+Example
+  ```command
+    docker build -t local/something-api:latest .
+  ```
+Example with arg
+  ```command
+    docker build --build-arg APP_ENV=development -t local/something-fe:latest .
+  ```
+  
+This command allows you to connect to the shell of your container. I prefer using "/bin/bash" but your container may not have bash installed and only "sh" which is more common.
+  ```command
+    docker exec -it <NAME>/<ID> <“sh”>/<”/bin/bash”>
+  ```
+Example
+  ```command
+    docker exec -it facec6d02097 sh
+  ```
+  
+Run create the container using the image you tell it. You can specify lots of parameters, I recommend you to add a name to your container and you may need to specify some ports to expose. As for docker-compose, the -d make the container run in the background
+  ```command
+    docker run (-d) (-p <hostPort>:<containerPort>) (--name <NAME>) <IMGNAME>/<IMGID>
+  ```
+
+The docker rm remove only one container when docker-compose rm remove every container started with a docker-compose command.
+  ```command
+    docker rm <ID>/<NAME>
+    docker-compose rm
+  ```
+  
+Docker rmi delete the image you give as a parameter and recursively all the images intermediate used to build it.
+  ```command
+    docker rmi <ID>/<NAME>
+  ```
+ 
+This command prints you the logs of the container you specify. If you use the option -f --tail <NBLINE> you can follow the live flux of your logs (<NBLINE> is the number of lines you want to display. Keep in mind to choose a number of lines you can handle and to not be overwhelmed by your logs).
+  ```command
+      docker logs <ID>/<NAME> (-f --tail <NBLINE>)
+  ```
+  
+The option (<ID>/<NAME>) with the docker-compose logs let you see the logs from only one container instead of every logs. The point here is if you don’t use the -d option when using docker run or docker-compose up you will see your logs directly (but you will need to stop the container to quit the view). It can still be useful to debug launching apps.
+  ```command
+      docker-compose logs (<ID>/<NAME>)
+  ```
+
+Fix-permission-docker-kill  
   ```command
     sudo aa-status
     sudo systemctl disable apparmor.service --now
