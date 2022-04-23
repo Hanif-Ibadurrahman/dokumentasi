@@ -72,6 +72,9 @@ example: git archive --format=zip master
 untuk mengganti message commit yang berada di belakang commit message yang lainnya
 example: git rebase -i 3c612d0
 
+- clear local branch
+git branch | grep -v "develop" | grep -v "master" | xargs git branch -D
+
 Membuat repository baru
 
 echo "# Dokumentasi" >> README.md
