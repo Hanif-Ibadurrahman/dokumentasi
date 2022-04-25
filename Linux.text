@@ -645,3 +645,7 @@ How To Fix Busybox Initramfs Error On Ubuntu
 -Fix partision has some errors with this command 
 >fsck /dev/sda1 -y
 >exit
+
+----------------------------------------------------------------------------------------------------------
+List port 
+sudo lsof -i -P -n | grep LISTEN
