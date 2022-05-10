@@ -68,7 +68,7 @@
   ```command
   sudo apt install software-properties-common
   sudo add-apt-repository ppa:ondrej/php
-  sudo apt install php8.1 php7.4
+  sudo apt install php8.1 php8.1-curl php7.4 
   ```
 
 <a name="types--nvm"></a><a name="1.1.6"></a>
