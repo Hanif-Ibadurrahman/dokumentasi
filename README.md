@@ -271,3 +271,17 @@ rm -r ~/.config/navicat
 ```
 
 **[⬆ back to contents](#table-of-contents)**
+  
+<a name="types--doesn't-work"></a><a name="4"></a>
+
+- [4](#types--doesn't-work) **Doesn't work**
+
+<a name="types--doesn't-work-libfuse.so.2"></a><a name="4.1"></a>
+
+- [4.1](#types--doesn't-work-libfuse.so.2) **libfuse.so.2: cannot open shared object file**
+
+> Ubuntu 22.04: Appimage doesn't start : libfuse.so.2: cannot open shared object file: No such file or directory
+  
+```command
+sudo apt install libfuse2
+```
