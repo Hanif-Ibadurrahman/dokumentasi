@@ -245,9 +245,15 @@ aws configure
 
 List the buckets:
 ```command
-aws --endpoint-url http://192.168.1.51 s3 ls
+aws --endpoint-url http://endpoint ls
 ```
 
+Move content:
+```command
+aws --endpoint-url https://endpoint s3 mv --recursive s3://dox/attachment/document/document/ s3://dox/attachment/document/
+```
+  
+  
 
 **[⬆ back to contents](#table-of-contents)**
 
