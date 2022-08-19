@@ -87,7 +87,7 @@ wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 
 <a name="types--zsh"></a><a name="1.1.7"></a>
 
-- [1.1.6](#types--nvm) **[Oh My ZSH]**(https://ohmyz.sh/)
+- [1.1.7](#types--nvm) **[Oh My ZSH]**(https://ohmyz.sh/)
 
 ```command
 sudo apt update
@@ -228,6 +228,26 @@ Fix-permission-docker-kill
     sudo aa-status
     docker-compose down
   ```
+ 
+- [1.1.8](#types--aws-cli) **[AWS CLI]**(https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+
+Install
+```command
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+```
+
+Configure
+```command
+aws configure
+```
+
+List the buckets:
+```command
+aws --endpoint-url http://192.168.1.51 s3 ls
+```
+
 
 **[⬆ back to contents](#table-of-contents)**
 
