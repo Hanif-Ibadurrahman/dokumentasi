@@ -142,6 +142,25 @@ zsh
 set zsh for default terminal
 click hamburger button on terminal > preferences > unnamed > tab command > click Run a custom command instead of my shell > zsh
 
+~/.config/Code/User/settings.json
+{
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "terminal.integrated.defaultProfile.linux": "zsh",
+  "php.suggest.basic": false,
+  "[php]": {
+    "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+}
+
+Plugin: Eslint, change-case, Color Highlight, Docker, GitLents - Git supercharged, Prettier - Code Formatter, Svg Preview, PHP Intelephense, Laravel Extra Intellisense, Javascript and TypeScript Nightly, Github Copilot
+
 <a name="types--docker"></a><a name="1.1.8"></a>
 
 - [1.1.8](#types--docker) **Docker**
