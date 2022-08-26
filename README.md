@@ -142,7 +142,12 @@ zsh
 set zsh for default terminal
 click hamburger button on terminal > preferences > unnamed > tab command > click Run a custom command instead of my shell > zsh
 
-~/.config/Code/User/settings.json
+Location for setting VS Code
+```command
+~/.config/Code/User/settings.json 
+```
+
+```command
 {
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
@@ -158,6 +163,7 @@ click hamburger button on terminal > preferences > unnamed > tab command > click
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
 }
+```
 
 Plugin: Eslint, change-case, Color Highlight, Docker, GitLents - Git supercharged, Prettier - Code Formatter, Svg Preview, PHP Intelephense, Laravel Extra Intellisense, Javascript and TypeScript Nightly, Github Copilot
 
