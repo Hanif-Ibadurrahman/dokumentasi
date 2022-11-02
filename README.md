@@ -70,6 +70,10 @@
   sudo add-apt-repository ppa:ondrej/php
   sudo apt install php8.1 php8.1-curl php7.4 
   ```
+  Switch PHP Version
+  ```command
+  sudo update-alternatives --config php
+  ```
 
 <a name="types--nvm"></a><a name="1.1.6"></a>
 
