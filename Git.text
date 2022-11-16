@@ -90,3 +90,8 @@ Melakukan push pada repository yang telah ada
 git remote add origin https://github.com/Hanif-Ibadurrahman/Dokumentasi.git
 git branch -M main
 git push -u origin main
+
+Melakukan penghapusan branch ref
+
+git remote prune upstream
+git remote prune origin
