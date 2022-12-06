@@ -166,6 +166,9 @@ Location for setting VS Code
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[go]": {
+    "editor.defaultFormatter": "golang.go"
+  },
 }
 ```
 
