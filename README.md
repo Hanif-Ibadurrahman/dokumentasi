@@ -301,6 +301,26 @@ Dependencies required to install Ruby:
 ```command
 sudo apt install git curl libssl-dev libreadline-dev zlib1g-dev autoconf bison build-essential libyaml-dev libreadline-dev libncurses5-dev libffi-dev libgdbm-dev
 ```
+
+List latest stable versions
+```command  
+rbenv install -l
+``` 
+  
+Latest ruby now:
+```command  
+rbenv install 3.1.3
+``` 
+  
+Set global
+```command  
+rbenv global 3.1.3  
+```
+  
+Install Rails:
+```command
+  gem install rails
+```
   
 **[⬆ back to contents](#table-of-contents)**
 
