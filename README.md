@@ -261,7 +261,7 @@ Fix-permission-docker-kill
     docker-compose down
   ```
  
-- [1.1.8](#types--aws-cli) **[AWS CLI]**(https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+- [1.1.9](#types--aws-cli) **[AWS CLI]**(https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 
 Install
 ```command
@@ -285,8 +285,23 @@ Move content:
 aws --endpoint-url https://endpoint s3 mv --recursive s3://dox/attachment/document/document/ s3://dox/attachment/document/
 ```
   
-  
+- [1.2.0](#types--ruby-on-rails) **[Ruby on Rails]**
 
+Install rbenv
+```command
+git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+```
+  
+For Zsh:
+```command
+echo 'eval "$(~/.rbenv/bin/rbenv init - zsh)"' >> ~/.zshrc 
+```
+  
+Dependencies required to install Ruby:  
+```command
+sudo apt install git curl libssl-dev libreadline-dev zlib1g-dev autoconf bison build-essential libyaml-dev libreadline-dev libncurses5-dev libffi-dev libgdbm-dev
+```
+  
 **[⬆ back to contents](#table-of-contents)**
 
 
