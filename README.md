@@ -174,6 +174,17 @@ Location for setting VS Code
 
 Plugin: Eslint, change-case, Color Highlight, Docker, GitLents - Git supercharged, Prettier - Code Formatter, Svg Preview, PHP Intelephense, Laravel Extra Intellisense, Javascript and TypeScript Nightly, Github Copilot
 
+Laravel projects by globally installing the Laravel installer:
+```command
+   composer global require laravel/installer
+```
+
+For zsh:
+```command
+echo 'export PATH="$PATH:$HOME/.config/composer/vendor/bin"' >>  ~/.zshrc
+source ~/.zshrc
+```
+
 <a name="types--docker"></a><a name="1.1.8"></a>
 
 - [1.1.8](#types--docker) **Docker**
