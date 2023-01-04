@@ -291,6 +291,11 @@ List the buckets:
 aws --endpoint-url http://endpoint ls
 ```
 
+List content in buckets:
+```command
+aws --endpoint-url https://endpoint s3 ls s3://dox/attachment/document/
+```
+
 Move content:
 ```command
 aws --endpoint-url https://endpoint s3 mv --recursive s3://dox/attachment/document/document/ s3://dox/attachment/document/
