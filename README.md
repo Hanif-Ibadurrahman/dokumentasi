@@ -337,12 +337,10 @@ Install Rails:
 ```command
   gem install rails
 ```
-- [1.2.1](#types--rabbitmq) **[RABBIT MQ]**([https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html](https://www.rabbitmq.com))
+- [1.2.1](#types--rabbitmq) **[RABBIT MQ]**([https://www.rabbitmq.com](https://www.rabbitmq.com))
 
 Install
-
-Go to website, then copy script and save on format sh
-https://www.rabbitmq.com/install-debian.html#apt-cloudsmith
+Go to website [https://www.rabbitmq.com/install-debian.html#apt-clouds](https://www.rabbitmq.com/install-debian.html#apt-cloudsmith) then copy script and save on format sh
 
 ```command
 chmod 755 <filename>.sh
@@ -357,8 +355,6 @@ Note: If you enable this console after running the service, you will need to res
 
 it can be accessed using web browser by visiting: http://[IP]:15672/
 The default username and password are both set “guest” for the log in.
-
-
   
 **[⬆ back to contents](#table-of-contents)**
 
