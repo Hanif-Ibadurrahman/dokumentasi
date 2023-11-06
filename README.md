@@ -412,3 +412,19 @@ rm -r ~/.config/navicat
 ```command
 sudo apt install libfuse2
 ```
+
+<a name="types--not-found-go-lib"></a><a name="4.1"></a>
+
+- [4.2](#types--not-found-go-lib) **not found go lib**
+  
+```command
+export PATH=$(go env GOPATH)/bin:$PATH
+```
+
+<a name="types--export-variable-from-env-file"></a><a name="4.1"></a>
+
+- [4.3](#types--export-variable-from-env-file) **export variable from env file**
+  
+```command
+export $(cat .env)
+```
