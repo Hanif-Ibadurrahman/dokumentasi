@@ -358,6 +358,25 @@ The default username and password are both set “guest” for the log in.
   
 **[⬆ back to contents](#table-of-contents)**
 
+- [1.2.2](#types--golang) **[Golang]**
+
+Append the line to .zshrc: Run this command in your terminal:
+bash
+echo 'export PATH="$PATH:/home/aniv/go/bin"' >> ~/.zshrc
+
+    echo '...': Outputs the string inside the quotes.
+    >> ~/.zshrc: Appends that output to the end of the .zshrc file in your home directory. (Note: Use >> to append; a single > would overwrite the file.)
+
+Apply the changes: Reload the .zshrc file to apply the update to your current session:
+bash
+source ~/.zshrc
+Verify the PATH (optional): Check that the PATH updated correctly by running:
+bash
+echo $PATH
+You should see /home/aniv/go/bin included in the output.
+  
+**[⬆ back to contents](#table-of-contents)**
+
 
 <a name="types--create"></a><a name="2"></a>
 
