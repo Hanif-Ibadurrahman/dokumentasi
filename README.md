@@ -355,24 +355,24 @@ Note: If you enable this console after running the service, you will need to res
 
 it can be accessed using web browser by visiting: http://[IP]:15672/
 The default username and password are both set “guest” for the log in.
-  
-**[⬆ back to contents](#table-of-contents)**
 
 - [1.2.2](#types--golang) **[Golang]**
 
 Append the line to .zshrc: Run this command in your terminal:
-bash
+```bash
 echo 'export PATH="$PATH:/home/aniv/go/bin"' >> ~/.zshrc
-
-    echo '...': Outputs the string inside the quotes.
-    >> ~/.zshrc: Appends that output to the end of the .zshrc file in your home directory. (Note: Use >> to append; a single > would overwrite the file.)
+```
+echo '...': Outputs the string inside the quotes.
+>> ~/.zshrc: Appends that output to the end of the .zshrc file in your home directory. (Note: Use >> to append; a single > would overwrite the file.)
 
 Apply the changes: Reload the .zshrc file to apply the update to your current session:
-bash
+```bash
 source ~/.zshrc
+```
 Verify the PATH (optional): Check that the PATH updated correctly by running:
-bash
+```bash
 echo $PATH
+```
 You should see /home/aniv/go/bin included in the output.
   
 **[⬆ back to contents](#table-of-contents)**
