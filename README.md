@@ -362,8 +362,7 @@ Append the line to .zshrc: Run this command in your terminal:
 ```bash
 echo 'export PATH="$PATH:/home/aniv/go/bin"' >> ~/.zshrc
 ```
-echo '...': Outputs the string inside the quotes.
->> ~/.zshrc: Appends that output to the end of the .zshrc file in your home directory. (Note: Use >> to append; a single > would overwrite the file.)
+echo '...': Outputs the string inside the quotes. >> ~/.zshrc: Appends that output to the end of the .zshrc file in your home directory. (Note: Use >> to append; a single > would overwrite the file.)
 
 Apply the changes: Reload the .zshrc file to apply the update to your current session:
 ```bash
