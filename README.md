@@ -361,8 +361,23 @@ The default username and password are both set “guest” for the log in.
 Install 
 Go to website [Download and install - The Go Programming Language](https://go.dev/doc/install)
 
+Download via curl, change golang version if there is already a new version
 ```command
-rm -rf /usr/local/go && tar -C /usr/local -xzf go1.24.2.linux-amd64.tar.gz
+curl -OL https://go.dev/dl/go1.24.2.linux-amd64.tar.gz
+```
+
+or
+
+Check New version
+[Download golang](https://go.dev/dl/)
+
+Remove old version when exsist
+```command
+sudo rm -rf /usr/local/go
+```
+
+```commmand
+sudo tar -C /usr/local -xzf go1.24.2.linux-amd64.tar.gz
 ```
 
 (You may need to run each command separately with the necessary permissions, as root or through sudo.)
@@ -376,13 +391,13 @@ echo '...': Outputs the string inside the quotes. >> ~/.zshrc: Appends that outp
 
 Apply the changes: Reload the .zshrc file to apply the update to your current session:
 ```bash
-source ~/.zshrc
+zsh
 ```
-Verify the PATH (optional): Check that the PATH updated correctly by running:
+
+Check Golang
 ```bash
-echo $PATH
+go version
 ```
-You should see /usr/local/go/bin included in the output.
 
 - [1.2.3](#types--bun) **[Bun]**
 
