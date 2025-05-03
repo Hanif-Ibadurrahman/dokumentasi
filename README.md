@@ -358,9 +358,19 @@ The default username and password are both set “guest” for the log in.
 
 - [1.2.2](#types--golang) **[Golang]**
 
+Install 
+Go to website [Download and install - The Go Programming Language](https://go.dev/doc/install)
+
+```command
+rm -rf /usr/local/go && tar -C /usr/local -xzf go1.24.2.linux-amd64.tar.gz
+```
+
+(You may need to run each command separately with the necessary permissions, as root or through sudo.)
+> Do not untar the archive into an existing /usr/local/go tree. This is known to produce broken Go installations. 
+
 Append the line to .zshrc: Run this command in your terminal:
 ```bash
-echo 'export PATH="$PATH:/home/aniv/go/bin"' >> ~/.zshrc
+echo 'export PATH="$PATH:/usr/local/go/bin"' >> ~/.zshrc
 ```
 echo '...': Outputs the string inside the quotes. >> ~/.zshrc: Appends that output to the end of the .zshrc file in your home directory. (Note: Use >> to append; a single > would overwrite the file.)
 
@@ -372,7 +382,19 @@ Verify the PATH (optional): Check that the PATH updated correctly by running:
 ```bash
 echo $PATH
 ```
-You should see /home/aniv/go/bin included in the output.
+You should see /usr/local/go/bin included in the output.
+
+- [1.2.3](#types--bun) **[Bun]**
+
+Install 
+Go to website [Installation | Bun Docs](https://bun.sh/docs/installation)
+
+```command
+sudo apt install unzip
+curl -fsSL https://bun.sh/install | bash
+exec /usr/bin/zsh
+bun --help
+```
   
 **[⬆ back to contents](#table-of-contents)**
 
@@ -445,4 +467,9 @@ export PATH=$(go env GOPATH)/bin:$PATH
   
 ```command
 export $(cat .env)
+```
+or
+
+```command
+set -a && source .env && set +a
 ```
