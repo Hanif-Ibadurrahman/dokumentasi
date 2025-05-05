@@ -125,4 +125,6 @@ export NVM_DIR="$HOME/.nvm"
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-export PATH="$PATH:/usr/local/go/bin"
+
+# go
+export PATH="$PATH:/home/aniv/go/bin"
