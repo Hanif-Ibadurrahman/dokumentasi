@@ -399,6 +399,19 @@ Check Golang
 go version
 ```
 
+Alternative Install
+```command
+curl -OL https://go.dev/dl/go1.24.2.linux-amd64.tar.gz
+```
+
+```commmand
+tar -xzf go1.24.2.linux-amd64.tar.gz
+```
+
+```bash
+echo 'export PATH="$PATH:/home/aniv/go/bin"' >> ~/.zshrc
+```
+
 - [1.2.3](#types--bun) **[Bun]**
 
 Install 
