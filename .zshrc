@@ -127,4 +127,4 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 # go
-export PATH="$PATH:/home/aniv/go/bin"
+export PATH="$PATH:/usr/local/go/bin"
