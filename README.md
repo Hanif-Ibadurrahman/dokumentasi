@@ -50,6 +50,11 @@
   git config --global credential.helper store
   git config --global credential.helper cache
   ```
+  Set Config
+  ```command
+  git config --global user.name "Hanif Ibadurrahman"
+  git config --global user.email "irahman.hanif@gmail.com"
+  ```
 <a name="types--composer"></a><a name="1.1.4"></a>
 
 - [1.1.4](#types--composer) **Composer**
