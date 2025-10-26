@@ -66,6 +66,11 @@
   sudo chmod -R 755 /usr/local/bin/composer
   ```
 
+  Set Composer path
+  ```command
+  export PATH="$HOME/.config/composer/vendor/bin:$PATH"
+  ```
+
 <a name="types--php"></a><a name="1.1.5"></a>
 
 - [1.1.5](#types--php) **PHP**
